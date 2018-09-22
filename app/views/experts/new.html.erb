@@ -1,0 +1,11 @@
+
+
+
+<%= form_for @expert, url: {action: "create"} do |form| %>
+  <label for="name">Name</label>
+  <%= form.text_field :name %>
+  <label for="name">Website URL:</label>
+  <%= form.text_field :website %>
+  <%= form.submit %>
+<% end %>
+<%= link_to 'Back', experts_path %>

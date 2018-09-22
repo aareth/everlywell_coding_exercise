@@ -1,0 +1,26 @@
+Experts
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Website URL</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @experts.each do |expert| %>
+      <tr>
+        <td><%= expert.name %><td>
+        <td><%= expert.website %><td>
+        <td><%= link_to 'Show', expert %></td>
+        <td><%= link_to 'Edit', edit_expert_path(expert) %></td>
+        <td><%= link_to 'Destroy', expert, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  <tbody>
+  </table>
+
+  Create <%= link_to 'New Expert', new_expert_path %>
