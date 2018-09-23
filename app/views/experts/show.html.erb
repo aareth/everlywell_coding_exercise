@@ -1,3 +1,5 @@
+<%= javascript_include_tag "friend" %>
+
 <h1><%= @expert.name %></h1>
 <label>Website </label><%= @expert.website %>
 <br>
@@ -22,7 +24,7 @@
 
 <input id="expert_id" type="hidden" value="<%= @expert.id %>">
 
-<form>
+<form class="show form">
   <label> Add Friend </label>
   <input id="friend_to_add" type="text"></input>
   <button type="button" class="btn btn-primary"id="add_friend_button"> Add</button>
