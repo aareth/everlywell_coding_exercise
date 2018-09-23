@@ -3,7 +3,7 @@ Experts
   <thead>
     <tr>
       <th>Name</th>
-      <th>Website URL</th>
+      <th>Short URL</th>
       <th></th>
       <th></th>
       <th></th>
@@ -14,7 +14,7 @@ Experts
     <% @experts.each do |expert| %>
       <tr>
         <td><%= expert.name %><td>
-        <td><%= expert.website %><td>
+        <td><%= expert.short_url %><td>
         <td><%= link_to 'Show', expert %></td>
         <td><%= link_to 'Edit', edit_expert_path(expert) %></td>
         <td><%= link_to 'Destroy', expert, method: :delete, data: { confirm: 'Are you sure?' } %></td>
