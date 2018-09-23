@@ -4,6 +4,7 @@ Experts
     <tr>
       <th>Name</th>
       <th>Short URL</th>
+      <th>Number of Friends</th>
       <th></th>
       <th></th>
       <th></th>
@@ -15,6 +16,7 @@ Experts
       <tr>
         <td><%= expert.name %><td>
         <td><%= expert.short_url %><td>
+        <td><%= expert.friends.count %><td>
         <td><%= link_to 'Show', expert %></td>
         <td><%= link_to 'Edit', edit_expert_path(expert) %></td>
         <td><%= link_to 'Destroy', expert, method: :delete, data: { confirm: 'Are you sure?' } %></td>

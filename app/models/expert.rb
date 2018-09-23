@@ -1,6 +1,12 @@
 class Expert < ActiveRecord::Base
   has_many :headers
+  has_and_belongs_to_many :friends,
+              class_name: "Expert",
+              join_table: :friendships,
+              foreign_key: :user_id,
+              association_foreign_key: :friend_user_id
   after_create :grab_headers_from_website, :shorten_url
+
 
   def grab_headers_from_website
     response = HTTParty.get(self.website)
@@ -19,6 +25,12 @@ class Expert < ActiveRecord::Base
 
   def shorten_url
     self.short_url = Bitly.client.shorten(website).short_url
+    save
+  end
+
+  def add_friend(expert)
+    self.friends << expert
+    expert.friends << self
   end
 
 end
