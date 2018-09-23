@@ -1,6 +1,6 @@
 class Expert < ActiveRecord::Base
   has_many :headers
-  after_create :grab_headers_from_website
+  after_create :grab_headers_from_website, :shorten_url
 
   def grab_headers_from_website
     response = HTTParty.get(self.website)
@@ -15,6 +15,10 @@ class Expert < ActiveRecord::Base
     headers_by_tag.each do |header|
       self.headers.create(text: header.text)
     end
+  end
+
+  def shorten_url
+    self.short_url = Bitly.client.shorten(website).short_url
   end
 
 end

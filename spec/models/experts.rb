@@ -17,6 +17,20 @@ RSpec.describe Expert, type: :model do
       expect(expert.headers.first.text).to eq("\n  \n   The Clean Code Blog")
     end
 
+    it 'creates a non nil short url' do
+      expert = Expert.create(name: "Robert C. Martin", website:"https://blog.cleancoder.com/uncle-bob/2018/08/28/CraftsmanshipMovement.html")
+
+      expect(expert.short_url).to_not be nil
+    end
+
+    it 'creates an accurate short url' do
+      expert = Expert.create(name: "Robert C. Martin", website:"https://blog.cleancoder.com/uncle-bob/2018/08/28/CraftsmanshipMovement.html")
+
+      full_response = HTTParty.get(expert.website)
+      short_response = HTTParty.get(expert.short_url)
+      expect(short_response.body).to eq(full_response.body)
+    end
+
   end
 
 end
