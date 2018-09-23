@@ -1,5 +1,63 @@
 <h1><%= @expert.name %></h1>
-<label>Website URL:</label><%= @expert.website %>
+<label>Website </label><%= @expert.website %>
+<br>
+<label>Shortened Website </label><%= @expert.short_url %>
+<br>
+<label>Headers</label>
+<ul>
+<% @expert.headers.each do |header| %>
+  <li><%= header.text %></li>
+<% end %>
+</ul>
+<br>
+
+
+<label>Friends Pages:</label>
+<ul>
+<% @expert.friends.each do |friend| %>
+  <li><a href="<%= friend.website %>"><%= friend.website %></a></li>
+<% end %>
+</ul>
+<br>
+
+<input id="expert_id" type="hidden" value="<%= @expert.id %>">
+
+<form>
+  <label> Add Friend </label>
+  <input id="friend_to_add" type="text"></input>
+  <button type="button" class="btn btn-primary"id="add_friend_button"> Add</button>
+</form>
+<br>
+
+<form>
+  <label> Find Friend by Subject</label>
+  <input id="friend_subject_to_add" type="text"></input>
+  <button type="button" class="btn btn-primary" id="find_friend_button"> Find</button>
+</form>
+
+
+
+<div class="modal" tabindex="-1" role="dialog" id='path_modal'>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Friends to get to expert</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="path-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 
 <%= link_to 'Back', experts_path %>

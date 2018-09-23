@@ -33,4 +33,33 @@ class Expert < ActiveRecord::Base
     expert.friends << self
   end
 
+  def find_friend(subject)
+    target_expert_id = Header.find_by_text(subject).expert.id
+    @already_visited = []
+    path = []
+    path = find_shortest_path(self, target_expert_id, path, subject)
+    path << self.name
+    path.reverse
+  end
+
+  def find_shortest_path(current_expert, target_expert_id, path, subject)
+    begin
+      target = current_expert.friends.find(target_expert_id)
+    rescue
+    end
+    unless target.nil?
+      path << Expert.find(target_expert_id).name + "(\"#{subject}\")"
+      return path
+    end
+
+    current_expert.friends.each do |friend|
+      unless @already_visited.include? friend.id
+        @already_visited << friend.id
+        path = find_shortest_path(friend, target_expert_id, path, subject)
+        path << friend.name if !path.empty?
+      end
+    end
+    path
+  end
+
 end
